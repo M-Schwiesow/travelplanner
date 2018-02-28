@@ -1,0 +1,49 @@
+<html>
+  <head>
+    <title>Registration and Login</title>
+  </head>
+  <body>
+    <!--Registration field for new user-->
+    <fieldset>
+      <legend>Registration</legend>
+      <form action="{% url 'loginReg:process' %}" method="POST">
+        {% csrf_token %}
+        <p>Name:</p>
+        <input type="text" name="name">
+        <p>Username:</p>
+        <input type="text" name="username">
+        <p>Password:</p>
+        <input type="password" name="password">
+        <p>*Password should be at least 8 characters</p>
+        <p>Confirm Password:</p>
+        <input type="password" name="confirm_password">
+        <p>
+        <input type="submit" value="Register">
+        </p>
+      </form>
+  </fieldset>
+
+  <!-- display messages, if present -->
+  {% if messages %}
+  <ul class = "messages">
+    {% for message in messages %}
+      <li>{{message}}</li>
+    {% endfor %}
+  </ul>
+  {% endif %}
+
+  <!--login field for existing user-->
+  <fieldset>
+    <legend>Login</legend>
+    <form action="{% url 'loginReg:login' %}" method='POST'>
+        {% csrf_token %}
+        <p>Username:</p>
+        <input type="text" name="username">
+        <p>Password:</p>
+        <input type="password" name="password">
+        <p></p>
+        <input type="submit" value="Sign In">
+    </form>
+  </fieldset>
+  </body>
+</html>

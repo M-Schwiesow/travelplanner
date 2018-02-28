@@ -1,0 +1,52 @@
+<html>
+  <head>
+    <title>Travel Dashboard</title>
+  </head>
+  <body>
+  <!--move this to the top-right -->
+  <a href="{% url 'loginReg:logout' %}">logout</a>
+  <!--move this to the bottom-right -->
+  <a href="{% url 'travels:addtrip' %}">Add Travel Plan</a>
+  <h1>Hello, {{user.name}}!</h1>
+  
+  <!--logged user table-->
+  Your Trip Schedules
+  <table>
+    <tr>
+      <th>Destination</th>
+      <th>Travel Start Date</th>
+      <th>Travel End Date</th>
+      <th>Plan</th>
+    </tr>
+    <!--for loop to add trips-->
+    {% for trip in trip_list %}
+    <tr>
+      <td><a href="{% url 'travels:destination' trip.id %}">{{trip.destination}}</a></td>
+      <td>{{trip.start}}</td>
+      <td>{{trip.end}}</td>
+      <td>{{trip.description}}</td>
+    </tr>
+    {% endfor %}
+  </table>
+
+  Other User's Travel Plans:
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Destination</th>
+            <th>Travel Start Date</th>
+            <th>Travel End Date</th>
+            <th>Do You Want to Join?</th>
+          </tr>
+          {% for trip in other_trips %}
+          <tr>
+            <td>{{trip.planned_by.name}}</td>
+            <td><a href="{% url 'travels:destination' trip.id %}">{{trip.destination}}</a></td>
+            <td>{{trip.start}}</td>
+            <td>{{trip.end}}</td>
+            <td><a href="{% url 'travels:join' trip.id %}">Join</a></td>
+          {% endfor %}
+    </table>
+
+  </body>
+</html>
