@@ -68,15 +68,14 @@ class UserManager(models.Manager):
         return User.objects.filter(username = data['username'])[0].id
       else:
         error.append("Invalid password/username combination.")
-        print "username passed, password failed"
         return error
     else:
       error.append("Invalid password/username combination.")
       print "invalid username"
       return error
   
-  def list_travellers(self, trip_id, user_id):
-    return self.filter(trips__id=int(trip_id)).exclude(id=int(user_id))
+  def list_travellers(self, trip_id):
+    return self.filter(trips__id=int(trip_id)).exclude(id=User.objects.get(plans__id=int(trip_id)).id)
 
 # Create your models here.
 class User(models.Model):

@@ -1,36 +1,46 @@
+<!DOCTYPE html>
 <html>
   <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Travel Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css">
+    <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
   </head>
   <body>
-  <!--move this to the top-right -->
-  <a href="{% url 'loginReg:logout' %}">logout</a>
-  <!--move this to the bottom-right -->
-  <a href="{% url 'travels:addtrip' %}">Add Travel Plan</a>
-  <h1>Hello, {{user.name}}!</h1>
+    <section class="section">
+      <h1 class="title is-2">Hello, {{user.name}}!</h1>
+      <!--move this to the top-right -->
+      <a class="subtitle" href="{% url 'loginReg:logout' %}">logout</a>
+      <!--move this to the bottom-right -->
+      <a class="subtitle is-link" href="{% url 'travels:addtrip' %}">Add Travel Plan</a>
+    </section>
   
   <!--logged user table-->
-  Your Trip Schedules
-  <table>
-    <tr>
-      <th>Destination</th>
-      <th>Travel Start Date</th>
-      <th>Travel End Date</th>
-      <th>Plan</th>
-    </tr>
-    <!--for loop to add trips-->
-    {% for trip in trip_list %}
-    <tr>
-      <td><a href="{% url 'travels:destination' trip.id %}">{{trip.destination}}</a></td>
-      <td>{{trip.start}}</td>
-      <td>{{trip.end}}</td>
-      <td>{{trip.description}}</td>
-    </tr>
-    {% endfor %}
-  </table>
+  <div class="container">
+    <h2 class="title is-4">Your Trip Schedules</h2>
+    <table class="table is-bordered is-striped">
+      <tr>
+        <th>Destination</th>
+        <th>Travel Start Date</th>
+        <th>Travel End Date</th>
+        <th>Plan</th>
+      </tr>
+      <!--for loop to add trips-->
+      {% for trip in trip_list %}
+      <tr>
+        <td><a href="{% url 'travels:destination' trip.id %}">{{trip.destination}}</a></td>
+        <td>{{trip.start}}</td>
+        <td>{{trip.end}}</td>
+        <td>{{trip.description}}</td>
+      </tr>
+      {% endfor %}
+    </table>
+  </div>
 
-  Other User's Travel Plans:
-    <table>
+<div class="container">
+  <h2 class="title is-4">Other User's Travel Plans:</h2>
+    <table class="table is-bordered is-striped">
         <tr>
             <th>Name</th>
             <th>Destination</th>
@@ -47,6 +57,7 @@
             <td><a href="{% url 'travels:join' trip.id %}">Join</a></td>
           {% endfor %}
     </table>
+  </div>
 
   </body>
 </html>

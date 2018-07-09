@@ -1,23 +1,27 @@
 <html>
-  <head>
-    <title>Add an item</title>
-  </head>
+    <head>
+        <title>Add a Trip</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css">
+        <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
+      </head>
   <body>
-  <!-- move these to top-right -->
-  <a href="{% url 'travels:triplist' %}">Home</a>
-  <a href="{% url 'loginReg:logout' %}">logout</a>
-  <h1>Add Trip</h1>
-  
-  <!-- display messages, if present -->
-  {% if messages %}
-  <ul class = "messages">
-    {% for message in messages %}
-      <li>{{message}}</li>
-    {% endfor %}
-  </ul>
-  {% endif %}
+    <div class="hero is-small">
+      <div class="hero-head">
+        <!-- move these to top-right -->
+        <div class="navbar">
+          <div class="navbar-end">
+        <a class="navbar-item" href="{% url 'travels:triplist' %}">Home</a>
+        <a class="navbar-item" href="{% url 'loginReg:logout' %}">logout</a>
+      </div><!--close navbar-end-->
+      </div><!--close navbar-->
+      </div><!--close hero-head-->
+      <h1 class="title is-1">Add Trip</h1>
+    </div>
 
   <!--form to create item-->
+  <div class="section">
   <form action="{% url 'travels:create'  %}" method='POST'>
     {% csrf_token %}
     <p>Destination: <input type="text" name="destination"></p>
@@ -26,6 +30,19 @@
     <p>Travel Date To:  <input type="date" name="end"></p>
     <input type="submit" value="Add">
   </form>
-
-  </body>
+  </div> <!-- close form container -->
+  <section class="section">
+    <!-- display messages, if present -->
+    {% if messages %}
+      <div class="notification is-warning">
+        <h3 class="title is-4 is-warning">Your submission contained some errors.</h3>
+        <ul class = "messages subtitle is-6">
+          {% for message in messages %}
+            <li>{{message}}</li>
+          {% endfor %}
+        </ul>
+      </div><!--close notification div-->
+    {% endif %}
+  </section><!--close messages section-->
+</body>
 </html>

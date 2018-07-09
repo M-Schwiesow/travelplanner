@@ -1,21 +1,39 @@
 <html>
   <head>
     <title>Destination</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css">
+    <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
   </head>
   <body>
-  <!-- move these to top-right -->
-  <a href="{% url 'travels:triplist' %}">Home</a>
-  <a href="{% url 'loginReg:logout' %}">logout</a>
-  <h1>{{trip.destination}}</h1>
-    <p>Planned By: {{trip.planned_by.name}}</p>
-    <p>Description: {{trip.description}}</p>
-    <p>Travel Date From: {{trip.start}}</p>
-    <p>Travel Date To: {{trip.end}}</p>
-
-  Other users' joining the trip:
-  <!--for loop to display users-->
-  {% for user in travellers %}
-    <p>{{user.name}}</p>
-  {% endfor %}
+    <section class="hero is-small">
+      <div class="navbar">
+        <div class="navbar-end">
+          <!-- move these to top-right -->
+          <a class="navbar-item" href="{% url 'travels:triplist' %}">Home</a>
+          <a class="navbar-item" href="{% url 'loginReg:logout' %}">logout</a>
+        </div><!--close navbar-end-->
+        </div><!--close navbar-->
+      <h1 class="title is-2">Destination details:</h1>
+    </section><!--close hero section-->
+    <section class="section">
+      <!--Okay, this looks alright on the page, but it would be much better to
+        organize that data as a table or a tile or a card or something. -->
+      <h1 class="title is-2">{{trip.destination}}</h1>
+      <p class="subtitle is-4">Planned By: {{trip.planned_by.name}}</p>
+      <p class="subtitle is-4">Description: {{trip.description}}</p>
+      <p class="subtitle is-4">Travel Date From: {{trip.start}}</p>
+      <p class="subtitle is-4">Travel Date To: {{trip.end}}</p>
+   </section>
+   {% if travellers %}
+    <section class="section">
+      <h2 class="title is-3">Other users' joining the trip:</h2>
+      <!--for loop to display users-->
+      {% for user in travellers %}
+        <p class="subtitle is-5">{{user.name}}</p>
+      {% endfor %}
+    </section>
+   {% endif %}
   </body>
 </html>

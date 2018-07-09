@@ -41,7 +41,7 @@ def destination(request, trip_id):
     context = {
       'trip' : Trip.objects.get_destination(trip_id),
       #check this query, then move it to the model!!!
-      'travellers' : User.objects.list_travellers(trip_id, request.session['user_id'])
+      'travellers' : User.objects.list_travellers(trip_id)
     }
 
     return render(request, 'travel_planner/destinationdetails.html', context)

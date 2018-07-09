@@ -1,49 +1,59 @@
 <html>
   <head>
     <title>Registration and Login</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css">
+    <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
   </head>
   <body>
-    <!--Registration field for new user-->
-    <fieldset>
-      <legend>Registration</legend>
-      <form action="{% url 'loginReg:process' %}" method="POST">
-        {% csrf_token %}
-        <p>Name:</p>
-        <input type="text" name="name">
-        <p>Username:</p>
-        <input type="text" name="username">
-        <p>Password:</p>
-        <input type="password" name="password">
-        <p>*Password should be at least 8 characters</p>
-        <p>Confirm Password:</p>
-        <input type="password" name="confirm_password">
-        <p>
-        <input type="submit" value="Register">
-        </p>
-      </form>
-  </fieldset>
+    <section class="section">
+      <!--testing Bulma columns-->
+      <div class="columns">
+        <!--Registration field for new user-->
+        <fieldset class="column is-one-quarter">
+            <legend>Registration</legend>
+            <form action="{% url 'loginReg:process' %}" method="POST">
+              {% csrf_token %}
+              <p>Name:</p>
+              <input type="text" name="name">
+              <p>Username:</p>
+              <input type="text" name="username">
+              <p>Password:</p>
+              <input type="password" name="password">
+              <p>*Password should be at least 8 characters</p>
+              <p>Confirm Password:</p>
+              <input type="password" name="confirm_password">
+              <p>
+              <input type="submit" value="Register">
+              </p>
+            </form>
+        </fieldset>
 
-  <!-- display messages, if present -->
-  {% if messages %}
-  <ul class = "messages">
-    {% for message in messages %}
-      <li>{{message}}</li>
-    {% endfor %}
-  </ul>
-  {% endif %}
-
-  <!--login field for existing user-->
-  <fieldset>
-    <legend>Login</legend>
-    <form action="{% url 'loginReg:login' %}" method='POST'>
-        {% csrf_token %}
-        <p>Username:</p>
-        <input type="text" name="username">
-        <p>Password:</p>
-        <input type="password" name="password">
-        <p></p>
-        <input type="submit" value="Sign In">
-    </form>
-  </fieldset>
+        <!--login field for existing user-->
+        <fieldset class="column is-one-quarter">
+          <legend>Login</legend>
+          <form action="{% url 'loginReg:login' %}" method='POST'>
+              {% csrf_token %}
+              <p>Username:</p>
+              <input type="text" name="username">
+              <p>Password:</p>
+              <input type="password" name="password">
+              <p></p>
+              <input type="submit" value="Sign In">
+          </form>
+        </fieldset>
+      </div><!--end columns test-->
+        <!-- display messages, if present -->
+        {% if messages %}
+        <div class="notification is-danger">
+          <ul class = "messages">
+            {% for message in messages %}
+              <li>{{message}}</li>
+            {% endfor %}
+          </ul>
+        </div>
+        {% endif %}
+    </section>
   </body>
 </html>
